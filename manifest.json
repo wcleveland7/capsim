@@ -14,7 +14,7 @@
 		}
 	],
 	"id": "359ABC29-2CAD-472C-A4B9-D0A4AE6E21FC",
-	"start_url": "https://capsimtest202.azurewebsites.net/",
+	"start_url": "index.html",
 	"background_color": "#3367D6",
 	"display": "standalone",
 	"scope": "/",

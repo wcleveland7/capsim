@@ -113,7 +113,7 @@
 
                 <!-- Tab0 content ================================================================================================ -->
                 <div id="tab0" class="tabcontent">
-                    <img src="/Images/AZ.PNG" alt="" width="800" height="600">
+                    <img src="/images/AZ.PNG" alt="" width="800" height="600">
 
                     <p>
                         This tab contains a map.  Maybe this is unnecessary since we are using ATAK?  Pin Drops will show up on this map (and in the log).
@@ -154,7 +154,7 @@
                 <div id="tab2" class="tabcontent">
 
                     <LEFT>
-                        <img id="img2" src="/Images/CAPF109_Page1.PNG" alt="" width="800px" height="600">
+                        <img id="img2" src="/images/CAPF109_Page1.PNG" alt="" width="800px" height="600">
                         <p>
                             This is an edittable version of the first page of the capf109 for the GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
                         </p>
@@ -165,7 +165,7 @@
                 <!-- Tab3 content ================================================================================================ -->
                 <div id="tab3" class="tabcontent">
                     <LEFT>
-                        <img id="img3" src="/Images/CAPF109_Page2.PNG" alt="" width="800px" height="600">
+                        <img id="img3" src="/images/CAPF109_Page2.PNG" alt="" width="800px" height="600">
                         <p>
                             This is an edittable version of the Second page of the capf109 for the GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
                         </p>
@@ -175,7 +175,7 @@
                 <!-- Tab4 content ================================================================================================ -->
                 <div id="tab4" class="tabcontent" valign="top">
                     <LEFT>
-                        <img id="img4" src="/Images/CAPF104a_Page1.PNG" alt="" width="800px" height="600">
+                        <img id="img4" src="/images/CAPF104a_Page1.PNG" alt="" width="800px" height="600">
                         <p>
                             This is an edittable version of the first page of the capf104a for the aircrew, probably not useful for GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
                         </p>
@@ -186,7 +186,7 @@
                 <!-- Tab5 content ================================================================================================ -->
                 <div id="tab5" class="tabcontent" valign="top">
                     <LEFT>
-                        <img id="img5" src="/Images/CAPF104a_Page2.PNG" alt="" width="800px" height="600">
+                        <img id="img5" src="/images/CAPF104a_Page2.PNG" alt="" width="800px" height="600">
                         <p>
                             This is an edittable version of the second page of the capf104a for the aircrew, probably not useful for GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
                         </p>
@@ -196,7 +196,7 @@
                 <!-- Tab5 content ================================================================================================ -->
                 <div id="tab6" class="tabcontent" valign="top">
                     <LEFT>
-                        <img src="/Images/ICS214.PNG" alt="" width="800px" height="600">
+                        <img src="/images/ICS214.PNG" alt="" width="800px" height="600">
                         <p>
                             This is an edittable version of the ICS214, probably not useful for aircrew.  caches data in local persistent store.  can export form to pdf.
                         </p>
@@ -1105,7 +1105,8 @@
 
             //let theUrl = 'https://capsim-test.servicebus.windows.net/messages/messages?body="helloworld"';
 
-            let theUrl = `/Message?capid=${g_capid}&messages="${msg}&callsign=${callsign}"`;
+            //WC let theUrl = `/Message?capid=${g_capid}&messages="${msg}&callsign=${callsign}"`;
+            let theUrl = `https://capsimtest202.azurewebsites.net/Message?capid=${g_capid}&messages="${msg}&callsign=${callsign}"`;
             console.log(theUrl);
             fetchGetText(theUrl);
 
@@ -1240,7 +1241,8 @@
             //      Green = ONLINE to CACTUS
             //      Yellow = ONLINE to CAPSIM, but not CACTUS.
 
-            let url = `api/Time`;
+            //WC let url = `api/Time`;
+            let url = `https://cors-anywhere.herokuapp.com/capsimtest202.azurewebsites.net/api/Time`; 
 
             let results1 = await fetchGetJson(url);
             console.log(results1);
@@ -1508,8 +1510,9 @@
 
                 if (sortie_num.length > 1 && (g_mission_rid > 0 || g_mission_num.length > 1)) {
 
-                    let urlMessages = `/messages?sortie_num=${sortie_num}&mission_rid=${g_mission_rid}&mission_num=${g_mission_num}`;
-
+                    //WC let urlMessages = `/messages?sortie_num=${sortie_num}&mission_rid=${g_mission_rid}&mission_num=${g_mission_num}`;
+                    let urlMessages = `https://cors-anywhere.herokuapp.com/capsimtest202.azurewebsites.net/messages?sortie_num=${sortie_num}&mission_rid=${g_mission_rid}&mission_num=${g_mission_num}`;
+                    
                     let results1 = await fetchGetJson(urlMessages);
                     console.log(results1);
 
@@ -1532,7 +1535,8 @@
             let dtg0 = new Date();
             let wing = 'AZ';        //  todo: read from config
 
-            let urlMessages = `/missions?wing=${wing}`;
+            //WC let urlMessages = `/missions?wing=${wing}`;
+            let urlMessages = `https://cors-anywhere.herokuapp.com/capsimtest202.azurewebsites.net/missions?wing=${wing}`;
 
             let results = await fetchGetJson(urlMessages);
             console.log(results);
@@ -1576,7 +1580,8 @@
                 //let callsign = g_callsign;
                 let msgJson = JSON.stringify(msg);
                 //let url = `/messages?callsign=${callsign}&messages=${msgJson}`;
-                let url = `/messages?messages=${msgJson}`;
+                //WC let url = `/messages?messages=${msgJson}`;
+                let url = `https://capsimtest202.azurewebsites.net/messages?messages=${msgJson}`;
                 console.log(url);
                 await fetchPostText(url, msg);
 
