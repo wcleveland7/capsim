@@ -1,0 +1,1602 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<html>
+<head>
+
+    <!--
+    <meta http-equiv="Content-Security-Policy"
+          content="script-src 'nonce-u9/WbjsRMU2LFXGRLcq6BA==' 'strict-dynamic'; object-src 'none'; base-uri 'none'; 'unsafe-hashes' 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc='" />
+          -->
+    <title>CAPSIM</title>
+
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#317EFB" />
+    <!--   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">  -->
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta name="theme-color content=" #3367D6"
+    <meta name="robots" content="noindex,nofollow">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/capf104a_Page1.png">
+    <link rel="manifest" href="manifest.json" />
+
+    <script type="application/javascript" src="/js/pc_utils.js"></script>
+    <script type="application/javascript" src="/js/httpHlpr.js"></script>
+    <script type="application/javascript" src="/js/radiomessage.js"></script>
+
+    <style>
+        /* Style the tab */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+            /* Style the buttons that are used to open the tab content */
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+            }
+
+                /* Change background color of buttons on hover */
+                .tab button:hover {
+                    background-color: #ddd;
+                }
+
+                /* Create an active/current tablink class */
+                .tab button.active {
+                    background-color: #ccc;
+                }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        button {
+            height: 50px;
+            width: 170px;
+            font-size: 1.25em;
+        }
+
+        <!--
+        .tabcontent {
+            animation: fadeEffect 1s; /* Fading effect takes 1 second */
+        }
+        -->
+
+
+    </style>
+</head>
+
+
+<body onload="onLoadFunction()">
+
+
+    <TABLE>
+
+        <TR>
+            <TD width="10%" valign="top" align="left">
+
+                <!-- Tab links -->
+                <div class="tab">
+                    <!--                    <button id="btn0"  class="tablinks" onclick="openCity(event, 'tab0')">Map</button> <br /> <br />   -->
+                    <button id="btn1" class="tablinks" onclick="refreshMessages(); openCity(event, 'tab1')">Messages</button> <br /> <br />
+                    <button id="btn2" class="tablinks" onclick="openCity(event, 'tab2')">CAPF109 P1</button> <br /> <br />
+                    <button id="btn3" class="tablinks" onclick="openCity(event, 'tab3')">CAPF109 P2</button> <br /> <br />
+                    <button id="btn4" class="tablinks" onclick="openCity(event, 'tab4')">CAPF104a P1</button> <br /> <br />
+                    <button id="btn5" class="tablinks" onclick="openCity(event, 'tab5')">CAPF104a P2</button> <br /> <br />
+                    <button id="btn6" class="tablinks" onclick="openCity(event, 'tab6')">ICS214</button> <br /> <br />
+                    <button id="btn7" class="tablinks" onclick="openCity(event, 'tab7')">Briefing</button> <br /> <br />
+                    <button id="btn8" class="tablinks" onclick="openCity(event, 'tab8')">Config</button> <br /> <br />
+                    <button id="btn9" class="tablinks" onclick="testLoadCache();">Cache Test</button> <br /> <br />
+                </div>
+            </TD>
+
+
+            <TD width="50%" valign="top">
+
+                <!-- Tab0 content ================================================================================================ -->
+                <div id="tab0" class="tabcontent">
+                    <img src="/Images/AZ.PNG" alt="" width="800" height="600">
+
+                    <p>
+                        This tab contains a map.  Maybe this is unnecessary since we are using ATAK?  Pin Drops will show up on this map (and in the log).
+                    </p>
+                </div>
+
+
+                <!-- Tab1 content ================================================================================================ -->
+                <div id="tab1" class="tabcontent">
+
+                    <CENTER>
+                        <!-- <h3><div id="refreshid">Refreshed: 5/20/2023 4:48:15 PM</div></h3>  -->
+                        <h3><div id="refreshid"></div></h3>
+                        <!--<button onclick="refreshMessages()">Refresh</button> -->
+
+                    </CENTER>
+
+                    <div id="msgDiv">
+                        <TABLE id="msgTbl" BORDER="1" BGCOLOR="BLACK" CELLPADDING="5">
+                            <thead>
+                                <TR BGCOLOR="WHITE">
+                                    <TH>TIME (ZULU)</TH>
+                                    <TH>REMARKS</TH>
+                                    <TH>TYPE</TH>
+                                </TR>
+                            </thead>
+
+                        </TABLE>
+                    </div>
+
+                    <p>
+                        This tab represents the "COMM" messages sent to cactus and the messages received from cactus.  Transport is via https.  The information entered in this app will be cached in the browser's local storage so that it is retained if the browser is closed or the tablet is rebooted.
+                    </p>
+                </div>
+
+
+                <!-- Tab2 content ================================================================================================ -->
+                <div id="tab2" class="tabcontent">
+
+                    <LEFT>
+                        <img id="img2" src="/Images/CAPF109_Page1.PNG" alt="" width="800px" height="600">
+                        <p>
+                            This is an edittable version of the first page of the capf109 for the GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
+                        </p>
+                    </LEFT>
+                </div>
+
+
+                <!-- Tab3 content ================================================================================================ -->
+                <div id="tab3" class="tabcontent">
+                    <LEFT>
+                        <img id="img3" src="/Images/CAPF109_Page2.PNG" alt="" width="800px" height="600">
+                        <p>
+                            This is an edittable version of the Second page of the capf109 for the GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
+                        </p>
+                    </LEFT>
+                </div>
+
+                <!-- Tab4 content ================================================================================================ -->
+                <div id="tab4" class="tabcontent" valign="top">
+                    <LEFT>
+                        <img id="img4" src="/Images/CAPF104a_Page1.PNG" alt="" width="800px" height="600">
+                        <p>
+                            This is an edittable version of the first page of the capf104a for the aircrew, probably not useful for GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
+                        </p>
+                    </LEFT>
+                </div>
+
+
+                <!-- Tab5 content ================================================================================================ -->
+                <div id="tab5" class="tabcontent" valign="top">
+                    <LEFT>
+                        <img id="img5" src="/Images/CAPF104a_Page2.PNG" alt="" width="800px" height="600">
+                        <p>
+                            This is an edittable version of the second page of the capf104a for the aircrew, probably not useful for GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
+                        </p>
+                    </LEFT>
+                </div>
+
+                <!-- Tab5 content ================================================================================================ -->
+                <div id="tab6" class="tabcontent" valign="top">
+                    <LEFT>
+                        <img src="/Images/ICS214.PNG" alt="" width="800px" height="600">
+                        <p>
+                            This is an edittable version of the ICS214, probably not useful for aircrew.  caches data in local persistent store.  can export form to pdf.
+                        </p>
+                    </LEFT>
+                </div>
+
+                <!-- Tab5 content ================================================================================================ -->
+                <div id="tab7" class="tabcontent" valign="top">
+                    <LEFT>
+                        <embed type="application/pdf" src="/files/briefing.pdf" width="800" height="600" title="Sortie Briefing Pdf" />
+
+
+                        <!--                        <iframe sandbox="" type="application/pdf" src="~/files/briefing.pdf" style="border:none;" title="Sortie Briefing Pdf" width="1000" height="600"></iframe>  -->
+                        <p>
+                            This is a non-edittable version of the CACTUS sortie briefing .pdf.  This does not display embedded in Chrome on Android.
+                        </p>
+                    </LEFT>
+                </div>
+
+                <!-- Tab8 content ================================================================================================
+                    CONFIG
+                -->
+                <div id="tab8" class="tabcontent" valign="top">
+                    <table>
+
+                        <tr>
+                            <td>
+                                <label for="capid"> CAP ID:</label>
+
+                                <!-- <input type="text" id="capid" name="capid" minlength="6" maxlength="6" size="6" value="" onchange="g_capid=this.value;">  -->
+                                <input type="number" id="capid" name="capid" min="100000" max="699999" size="6" value="" onchange="OnChangeCapid(this);">
+                            </td>
+                        </tr>
+
+
+                        <!-- Primary input to identify the mission. Not available if offline:-->
+                        <TR>
+                            <TD valign="top">
+                                <label for="mission_rid">Choose a Mission:</label>
+
+                                <div id="missionlist">
+
+                                    <select id="mission_rid" onchange="OnChangeMission_rid(this);">
+                                        <option value="0">Choose a mission:</option>
+                                    </select>
+                                </div>
+                            </TD>
+                        </TR>
+
+                        <!-- Alternative input to identify the mission. Only necessary if offline startup-->
+                        <tr>
+                            <td>
+                                <label for="mission_num"> Mission Number (for offline startup):</label>
+
+                                <input type="text" id="mission_num" name="mission_num" minlength="4" maxlength="10" size="12" value="" onchange="OnChangeMission_num(this);">
+                            </td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td>
+                                <label for="name">Sortie Number:</label>
+
+                                <input type="number" id="sortie_num" name="sortie_num" min="1" max="999" size="10" value="0" onchange="OnChangeSortie_number(this);">
+                            </td>
+                        </tr>
+                        <TR>
+                            <TD>
+                                <label for="sortie_type">Choose a sortie type:</label>
+
+                                <select id="sortie_type" onchange="OnChangeSortie_type(this);">
+                                    <option value="0">Choose:</option>
+                                    <option value="A">Air</option>
+                                    <option value="G">Ground</option>
+                                    <option value="S">sUAS</option>
+                                    <option value="U">UDF</option>
+                                </select>
+                            </TD>
+                        </TR>
+
+
+
+                        <!--
+                        <tr>
+                            <td>
+                                <label for="name"> callsign (6 to 7 characters):</label>
+
+                                <input type="text" id="callsign" name="callsign" minlength="4" maxlength="10" size="10" value="" onchange="OnChangeCallsign(this);">
+                            </td>
+                        </tr>
+                        -->
+                        <!--
+                        <TR>
+                            <TD>
+                                <label for="registration">Choose an Airplane:</label>
+
+                                <select id="registration">
+                                    <option value="NA">NA</option>
+                                    <option value="N15FA">N15FA</option>
+                                    <option value="N216CP">N216CP</option>
+                                    <option value="N298CP">N298CP</option>
+                                    <option value="N331CP">N331CP</option>
+                                    <option value="N365CA">N365CA</option>
+                                    <option value="N397CP">N397CP</option>
+                                    <option value="N447CP">N447CP</option>
+                                    <option value="N542CP">N542CP</option>
+                                    <option value="N655CP">N655CP</option>
+                                    <option value="N806CP">N806CP</option>
+                                    <option value="N879CP">N879CP</option>
+                                    <option value="N882CP">N882CP</option>
+                                    <option value="N930CP">N930CP</option>
+                                    <option value="N9456X">N9456X</option>
+                                    <option value="N9677A">N9677A</option>
+                                    <option value="N9890E">N9890E</option>                </select>
+                            </TD>
+                        </TR>
+                        <tr>
+                            <td>
+                                <label for="name"> callsign (6 to 7 characters):</label>
+
+                                <input type="text" id="name" name="name" minlength="6" maxlength="7" size="10">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="color" id="body" name="body" value="#f6b73c"> <label for="body">Favorite color</label>
+                            </td>
+                        </tr>
+                        -->
+
+                        <tr>
+                            <td>
+                                <button type="button" onclick=";">Archive Sortie Data</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" onclick="clearAllCaches();">Clear Cache</button>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <!--
+                    <p>
+                        We might have to config something to make this all work.  Probably need to store the aircraft id, probably as N-number, since cap callsign is changeable.  Hopefully,  i can figure the mission number and sortie number from the tablet identity and the current date/time.  However, this is just a mockup of what the ui might look like.
+                    </p>
+                    -->
+                </div>
+            </TD>
+
+
+            <td align="right" valign="top">
+
+                <button type="button" onclick="sendmessage('[Engine Start]');">Engine Start</button> &nbsp; &nbsp;
+                <button type="button" onclick="sendmessage('[Take Off]','NEXT?');">Take Off</button> <br /> <br />
+                <button type="button" onclick="sendmessage('[ARV]','NEXT?');">ARV</button> &nbsp; &nbsp;
+                <button type="button" onclick="sendmessage('[DEP]','NEXT?');">DEP</button> <br /> <br />
+                <button type="button" onclick="sendmessage('[RTB]','ETA (Zulu)?');">RTB</button> &nbsp; &nbsp;
+                <button type="button" onclick="sendmessage('[ETA]','Where When (Zulu)?');">ETA</button> <br /> <br />
+                <button type="button" onclick="sendmessage('[Landed]');">Landed</button>  &nbsp; &nbsp;
+                <button type="button" onclick="sendmessage('[Shutdown]');">Shutdown</button> <br /> <br />
+                <button type="button" onclick="sendmessage('[OPS Normal]');">OPS Normal</button>  &nbsp; &nbsp;
+                <button type="button" onclick="sendmessage('[Other]','NEXT?');">Other</button>  <br /> <br />
+                <button type="button" onclick="LOG();">LOG</button>   &nbsp; &nbsp;
+                <!-- <button type="button" onclick="pin_drop('[Drop Pin]');">Drop Pin</button> -->
+                <!-- <br /><br /><a href="sms:+4802904550?body=Text%20Here%20end!">Android SMS</a> -->
+                <!-- <br /><br /><a href="sms://open?addresses=+14802904550/&body=Text%20Here%20end!">iOS SMS</a> -->
+                <!-- <button type="button" onclick="LOP();">Lop</button>   &nbsp; &nbsp; -->
+
+                <br />
+                <label for="name">Remarks:</label> <br />
+
+                <textarea id="remarks" name="remarks" rows="3" cols="40" placeholder="enter remarks here!"></textarea>
+
+                <br />
+                PRIORITY MESSAGES:<br>
+                <SELECT NAME="msgtype" id="msgtype_id">
+                    <OPTION VALUE="0">Routine</OPTION>
+                    <OPTION VALUE="4">Beacon First Heard</OPTION>
+                    <OPTION VALUE="3">Beacon Bearing Report</OPTION>
+                    <OPTION VALUE="5">Beacon Silenced</OPTION>
+                    <OPTION VALUE="7">Objective Confirmed</OPTION>
+                    <OPTION VALUE="8">Objective Located</OPTION>
+                    <OPTION VALUE="15">Survivor Located</OPTION>
+                    <OPTION VALUE="101">Other Priority Message</OPTION>
+                    <OPTION VALUE="102">Other Emergency Message</OPTION>
+                </SELECT>
+
+                <h4 id="timeid">HHmm z</h4>
+                <div></div>
+                <h4 id="cxnState">not connected</h4>
+                <div></div>
+                <div id="coords"></div>
+                <div></div>
+                <div></div>
+                <div id="debugTxt"></div>
+                <div></div>
+
+            </td>
+        </TR>
+
+    </TABLE>
+
+
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        //  GLOBALS
+        var g_pinCt = 0;
+        //var g_lopCt = 0;
+        var g_position = null;
+
+        var g_cxnst = 0;                // Connection State: 0=NOT CONNECTED, 1=Connected to CAPSIM, 2=connected to CACTUS
+        var g_capid = 0;                // CAPID of user of this app.
+
+        var g_sortie_rid = 0;           //  ics204.rid  CACTUS sortie PK
+        var g_sortie_type = 'A';        //  air, ground, sUAS, UDF
+        var g_mission_num = '';         //  CACTUS mission number
+        var g_mission_rid = 0;          //  CACTUS mission.rid
+        var g_sortie = '';              //  CACTUS sortie number (from WMIRS)
+        //var g_callsign = '';            //  aircraft/vehicle callsign as it appears in CACTUS ICS204
+        var g_mission_list = null;      //  list of missions returned from CACTUS.
+
+        var g_messages = null;  	    // table of messages from CACTUS CAPF110 for display on Messages Tab.
+        //var g_lops = null;	    	    // array of LOPs for local plotting
+        var g_outboundmessages = null;	// array of messages pending transfer to CACTUS
+        //var g_outboundLOPs = null;	    // array of LOPs pending transfer to CACTUS
+        var g_capf104a = null;		    // CAPF104a object
+        var g_capf109 = null;		    // CAPF109 object
+        var g_ics214 = null;		    // ics214 object
+
+        // var g_positions = null;      // a collection of Location positions or coords.  Start collecting positions on "ARV" button, stop on "RTB" button.
+        //                              // add method to export to .kml
+
+    </script>
+
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        function openCity(evt, cityName) {
+            // Declare all variables
+            let i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+
+            document.getElementById(cityName).style.display = "block";
+
+            if (evt != null) {
+                evt.currentTarget.className += " active";
+            }
+
+        }
+    </script>
+
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        /*        function truncateCapid() {
+
+
+                    //  get HTML table for Messages
+                    let dt = document.getElementById('capid');
+
+
+                    if (dt != null) {
+                        dt.value = 0;
+                    }
+                    g_capid = 0;
+                    localStorage.setItem('g_capid', g_capid);
+                    console.log(`truncateCapid() : g_capid: ${g_capid}`);
+                }*/
+
+
+        function truncateMessageList() {
+
+            //  remove all the rows in the table.
+
+            //  get HTML table for Messages
+            let dt = document.getElementById('msgTbl');
+
+            if (dt != null) {
+
+                //  if rowcounts are different, then clear table.  write rows to table.
+                // remove all rows (except TH) from table.
+                while (dt.rows.length > 1) {
+                    //  https://www.w3schools.com/jsref/met_table_deleterow.asp
+                    dt.deleteRow(-1);
+                }
+            }
+            console.log("truncateMessageList()");
+        }
+
+        function OnChangeCapid(id) {
+
+            if (id == null) {
+                g_capid = 0;
+            }
+            else {
+                g_capid = id.value;
+            }
+            localStorage.setItem('g_capid', g_capid);
+            console.log(`g_capid: ${g_capid}`);
+            truncateMessageList();
+        }
+
+        function OnChangeSortie_type(id) {
+
+            if (id != null) {
+                g_sortie_type = id.value;
+            }
+            console.log(`g_sortie_type: ${g_sortie_type}`);
+
+
+            if (g_sortie_type == null || g_sortie_type == 'A') {
+                document.getElementById("btn4").hidden = false;      // CAPF104a P1
+                document.getElementById("btn5").hidden = false;       // CAPF104a P2
+
+                document.getElementById("btn2").hidden = true;     // CAPF109 P1
+                document.getElementById("btn3").hidden = true;     // CAPF109 P2
+                document.getElementById("btn6").hidden = true;      // ICS214
+            }
+            else {
+                document.getElementById("btn4").hidden = true;      // CAPF104a P1
+                document.getElementById("btn5").hidden = true;       // CAPF104a P2
+
+                document.getElementById("btn2").hidden = false;     // CAPF109 P1
+                document.getElementById("btn3").hidden = false;     // CAPF109 P2
+                document.getElementById("btn6").hidden = false;     // ICS214
+            }
+            localStorage.setItem('g_sortie_type', g_sortie_type);
+            console.log(`g_sortie_type: ${g_sortie_type}`);
+            truncateMessageList();
+            //truncateCapid();
+        }
+
+        function SetMissionNum(mission_num) {
+
+            document.getElementById("mission_num").value = mission_num;
+            localStorage.setItem('g_mission_num', mission_num);
+            g_mission_num = mission_num
+            console.log(`g_mission_num: ${g_mission_num}`);
+            truncateMessageList();
+            //truncateCapid();
+        }
+
+        function OnChangeMission_rid(id) {
+
+            if (id == null) {
+                g_mission_rid = 0;
+            }
+            else {
+                g_mission_rid = id.value;
+
+                // copy number to Mission_num
+                //  would this be useful for latter disconnected startup?
+                if (g_mission_list != null && g_mission_list.length > 0) {
+                    for (let i = 0; i < g_mission_list.length; i++) {
+
+                        let mission_num = g_mission_list[i].Mission_Num;
+                        let mission_rid = g_mission_list[i].Mission_rid;
+
+                        if (mission_rid == g_mission_rid) {
+                            SetMissionNum(mission_num);
+                        }
+                    }
+                }
+
+
+            }
+            localStorage.setItem('g_mission_rid', g_mission_rid);
+            console.log(`g_mission_rid: ${g_mission_rid}`);
+            truncateMessageList();
+            //truncateCapid();
+        }
+
+        function OnChangeSortie_number(id) {
+
+            if (id == null) {
+                g_sortie = 0;
+            }
+            else {
+                g_sortie = id.value;
+            }
+            localStorage.setItem('g_sortie', g_sortie);
+            console.log(`g_sortie: ${g_sortie}`);
+            truncateMessageList();
+            //truncateCapid();
+        }
+
+        /*        function OnChangeCallsign(id) {
+
+                    if (id != null) {
+                        g_callsign = id.value;
+                    }
+                    localStorage.setItem('g_callsign', g_callsign);
+                    console.log(`g_callsign: ${g_callsign}`);
+            truncateMessageList();
+                }
+        */
+
+
+        function OnChangeMission_num(id) {
+
+            if (id != null) {
+                //g_mission_num = id.value;
+                SetMissionNum(id.value);
+            }
+            truncateMessageList();
+            //truncateCapid();
+        }
+
+        function toSystemLog(funct_name, msg) {
+
+            if (msg != null && msg.trim().length > 0) {
+                console.log("TODO: write to file: [" + msg + "]");
+            }
+        }
+
+        function CoordFmt(n) {
+
+            n = Math.abs(n);
+
+            let deg = Math.floor(n);
+            let decMin = ((n - deg) * 60).toFixed(4);
+
+            let s = deg.toString() + "° " + decMin + "'";
+
+            return s;
+        }
+
+        const x = document.getElementById("coords");
+        //const dbt = document.getElementById("debugTxt");
+
+
+    </script>
+
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        function GeoLocationSuccess(pos) {
+
+            //  https://www.w3schools.com/js/js_api_geolocation.asp
+            g_position = pos;
+
+            //const crd = pos.coords;
+            console.log(pos.coords);
+
+            if (pos != null && pos.coords != null) {
+                let lat = pos.coords.latitude;
+                let lng = pos.coords.longitude;
+                let acc = pos.coords.accuracy;
+                let alt = pos.coords.altitude;
+                let trk = pos.coords.heading;
+                let spd = pos.coords.speed;
+                let tim = pos.timestamp;
+
+                console.log(`lat=${lat}, lng=${lng}, acc=${acc}, alt=${alt}, trk=${trk}, spd=${spd}, tim=${tim}`);
+                //console.log(JSON.stringify(pos));
+                //;
+            }
+            else {
+                console.log('position is null')
+            }
+
+            document.getElementById("coords").innerHTML = 'N' + CoordFmt(g_position.coords.latitude) + '&nbsp;&nbsp;W' + CoordFmt(g_position.coords.longitude);
+        }
+
+        function GeoLocationError(err) {
+            console.error(`ERROR(${err.code}): ${err.message}`);
+        }
+
+
+        function startGeoLocationWatcher() {
+
+
+            options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0,
+            };
+
+            navigator.geolocation.watchPosition(GeoLocationSuccess, GeoLocationError, options);
+
+        }
+
+        function startTime() {
+
+            (function () {
+                function checkTime(i) {
+                    return (i < 10) ? "0" + i : i;
+                }
+
+                function startTime() {
+                    let today = new Date(),
+                        h = checkTime(today.getUTCHours()),
+                        m = checkTime(today.getUTCMinutes()),
+                        s = checkTime(today.getUTCSeconds());
+                    document.getElementById('timeid').innerHTML = h + ":" + m + ":" + s + "z";
+                    t = setTimeout(function () {
+                        startTime()
+                    }, 500);
+
+                    // getLocation();
+                }
+                startTime();
+            })();
+
+        }
+
+    </script>
+
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        function getHrMin() {
+
+            let today = new Date(),
+                h = checkTime(today.getUTCHours()),
+                m = checkTime(today.getUTCMinutes()),
+                s = checkTime(today.getUTCSeconds());
+
+            let now = h + ":" + m + "z";
+
+            return now;
+        }
+
+        function getHrMinSec() {
+
+            let today = new Date(),
+                h = checkTime(today.getUTCHours()),
+                m = checkTime(today.getUTCMinutes()),
+                s = checkTime(today.getUTCSeconds());
+
+            let now = h + ":" + m + ":" + s + "z";
+
+            return now;
+        }
+
+        function toCAPF104a(msg) {
+            if (msg != null) {
+                console.log('CAPF104a' + msg);
+                // TODO: CAPF104a
+
+            }
+        }
+
+        function validateConfig() {
+
+            if (g_capid == null || g_capid < 100000 || g_capid > 700000) {
+                console.log('OOPS - Enter your CAP ID on Config Tab.');
+                alert('OOPS - Enter your CAP ID on Config Tab.');
+                return false;
+            }
+
+            if (g_sortie == 0) {
+                console.log('OOPS - Choose sortie number on Config Tab.');
+                alert('OOPS - Choose sortie number on Config Tab.');
+                return false;
+            }
+
+            if (g_mission_rid <= 0 && g_mission_num.trim().length == 0) {
+                console.log('OOPS - Choose Mission or Mission Num on Config Tab.');
+                alert('OOPS - Choose Mission or Mission Num on Config Tab.');
+                return false;
+            }
+
+            if (g_sortie_type == null || (g_sortie_type != 'A' && g_sortie_type != 'G' && g_sortie_type != 'U')) {
+                console.log('OOPS - Choose Sortie Type on Config Tab.');
+                alert('OOPS - Choose Sortie Type on Config Tab.');
+                return false;
+            }
+
+            return true;
+        }
+
+        async function toCACTUS(msg, callsign) {
+            if (msg != null) {
+                console.log('to CACTUS' + msg);
+                toCAPF104a(msg);
+                // TODO: CACTUS (or queue)
+
+                SendToAzureQ(msg, callsign);
+
+            }
+        }
+
+        function LOG() {
+
+            const dbt = document.getElementById("debugTxt");
+            dbt.innerText = "";
+
+            let remarks = document.getElementById("remarks");
+
+            let msg = 'TO CAPF104a: tablet123: ' + getHrMin() + ' ' + remarks.value
+            dbt.innerText = msg;
+            toCAPF104a(msg)
+
+            document.getElementById("remarks").value = "";
+
+        }
+
+        /*
+        function LOP() {
+
+            //  https://www.w3schools.com/js/js_api_geolocation.asp
+
+            g_lopCt++;  // increment the global LOP counter
+
+            const dbt = document.getElementById("debugTxt");
+            dbt.innerText = "";
+            let x = document.getElementById("remarks");
+
+
+            try {
+
+                if (g_position != null) {
+                    let coords = g_position.coords;
+
+                    if (coords != null) {
+
+                        let lat = coords.latitude;
+                        let lng = coords.longitude;
+                        let acc = coords.accuracy;
+                        let alt = coords.altitude;     // meters MSL
+                        let alt_acc = coords.altitudeAccuracy;
+                        let heading = coords.heading;
+                        let speed = coords.speed;      // meters per second
+
+                        //console.log(`latitude               = ${lat}`);
+                        //console.log(`longitude              = ${lng}`);
+                        //console.log(`accuracy               = ${acc}`);
+                        //console.log(`altitude               = ${alt} meters MSL`);
+                        //console.log(`altitude accuracy      = ${alt_acc}`);
+                        //console.log(`heading                = ${heading}`);
+                        //console.log(`speed                  = ${speed} meters per second`);
+
+                        let remarks = x.value;
+
+                        let remark0 = "lop #" + g_lopCt + ", " + getHrMin();
+
+                        if (heading != null) {
+                            remark0 += ", " + heading.toFixed(0);
+                        }
+                        else {
+                            remark0 += ", ";
+                        }
+
+                        remark0 += ", " + lat.toFixed(4) + ", " + lng.toFixed(4);
+
+                        if (alt != null) {
+                            remark0 += ", " + alt.toFixed(0);
+                        }
+                        else {
+                            remark0 += ", ";
+                        }
+
+                        remark0 += ", " + x.value;
+
+
+                        //console.log(remark0);
+                        toCACTUS(remark0);
+
+                        dbt.innerText = remark0;
+                        x.value = "";
+                    }
+
+
+                }
+                else {
+
+                    // since no location information prompt user for LOP data
+                    dbt.innerText = getHrMin() + " Since no location information prompt user for LOP data";
+                }
+
+
+                //let descr = "Enter pin discription: ( " + g_pinCt + ": " + x.innerText + " " + getHrMin() + " )";
+                //let descr = "Enter pin discription: ( " + remark0 + " )";
+                //let remarks = prompt(descr, "");
+                //console.log(remark0 + ' ' + remarks);
+
+                //  TODO: put into log
+                //  TODO: send to CACTUS
+                //  TODO: plot on tab:Plot
+
+            }
+            catch (ex) {
+                dbt.innerText = ex.message;
+
+                toSystemLog('LOP', msg);
+            }
+
+        }
+        */
+
+        /*
+        function pin_drop() {
+
+            g_pinCt++;  // increment the global pin counter
+            const dbt = document.getElementById("debugTxt");
+            dbt.innerText = "";
+            //  let x = document.getElementById("remarks");
+
+            try {
+
+                if (g_position != null) {
+
+                    let coords = g_position.coords;
+
+                    if (coords != null) {
+
+                        let lat = coords.latitude;
+                        let lng = coords.longitude;
+                        let acc = coords.accuracy;
+                        let alt = coords.altitude;     // meters MSL
+                        let alt_acc = coords.altitudeAccuracy;
+                        let heading = coords.heading;
+                        let speed = coords.speed;      // meters per second
+
+
+                        let remark0 = "TO CACTUS and CAPF104a: Pin# " + g_pinCt + ": " + lat.toFixed(4) + "," + lng.toFixed(4) + ", " + getHrMin();
+
+                        let descr = "Enter pin description: ( " + remark0 + " )";
+
+                        let remarks = prompt(descr, "");
+                        let msg = remark0 + ' ' + remarks;
+                        dbt.innerText = msg;
+
+                        toCAPF104a(msg);
+                    }
+                }
+                else {
+
+                    // since no location information prompt user for LOP data
+
+                    let remark0 = "Pin# " + g_pinCt + ": "; //" + getHrMin();
+
+                    let descr = "Enter pin description (lat, lng, alt ...): ( " + remark0 + " )";
+
+                    let remarks = prompt(descr, "");
+                    dbt.innerText = "TO CAPF104a " + remark0 + ' ' + remarks;
+
+                    let msg = remark0 + ' ' + remarks;
+
+                    toCAPF104a(msg);
+
+                    // TODO: put into log
+                }
+
+            }
+            catch (ex) {
+                dbt.innerText = ex.message;
+
+                toSystemLog('pin_drop', msg);
+            }
+
+
+        }
+        */
+
+        function checkTime(i) {
+            return (i < 10) ? "0" + i : i;
+        }
+
+
+
+        async function sendmessage(name, question) {
+
+            if (validateConfig()) {
+                let dtg0 = new Date();
+
+                const dbt = document.getElementById("debugTxt");
+                dbt.innerText = "";
+
+                let today = new Date(),
+                    h = checkTime(today.getUTCHours()),
+                    m = checkTime(today.getUTCMinutes()),
+                    s = checkTime(today.getUTCSeconds());
+
+                let now = h + ":" + m + "z";
+
+                //  get mission_number
+                //  get sortie_type
+                //  get sortie number
+                let msgtype_id = document.getElementById("msgtype_id");
+                let msgtype = 0;
+                if (msgtype_id != null) {
+                    msgtype = msgtype_id.value;
+                }
+                let sortie_num = `${g_sortie_type}${lpad(g_sortie, 4)}`;
+
+                console.log(`g_capid = [${g_capid}]`);
+                //console.log(`g_callsign = [${g_callsign}]`);
+                console.log(`mission_rid = [${g_mission_rid}]`);
+                console.log(`mission_num = [${g_mission_num}]`);
+                console.log(`sortie_type = [${g_sortie_type}]`);
+                console.log(`sortie = [${g_sortie}]`);
+                console.log(`sortie_num = [${sortie_num}]`);
+                console.log(`msgtype = [${msgtype}]`);
+
+
+
+                //  TODO: what if no location information is available?, prompt user for coordinates
+
+
+                //alert('send a ' + name + ' message to cactus.  if offline, queue the message in local storage.'  );
+                let remarks = document.getElementById("remarks");
+                let loc = document.getElementById("coords");
+
+                let remarkstxt = remarks.value;
+
+                let bContinue = true;
+
+                if (question != null) {
+                    let answer = prompt(question);
+
+                    if (answer != null) {
+                        //msg += ' ' + answer;
+                        remarkstxt += ' ' + answer;
+                    }
+                }
+                else {
+                    bContinue = confirm('Are you sure?');
+
+                }
+
+                if (bContinue == true) {
+
+                    //remarkstxt = sanitize(remarkstxt);
+
+                    let msg = 'TO CACTUS and CAPF104a: tablet123: ' + now + ',' + name + ',"' + remarkstxt + '",' + loc.innerText
+
+
+                    dbt.innerText = msg;
+
+                    let lat = 0.0;
+                    let lng = 0.0;
+
+                    if (g_position != null && g_position.coords != null) {
+                        lat = g_position.coords.latitude;
+                        lng = g_position.coords.longitude;
+                    }
+
+                    let rm = new RadioMessage(name + ' ' + remarkstxt, lat, lng); // TODO: FIX callsign
+                    rm.Message_Type_ = msgtype;
+                    rm.Mission_rid = g_mission_rid;
+                    rm.Mission_Num = g_mission_num;
+                    rm.Sortie_Num = g_sortie;
+                    rm.Sortie_Type = g_sortie_type;
+
+                    console.log(rm);
+                    await toCACTUS(JSON.stringify(rm), rm.VID);
+
+                    if (remarks != null && remarks.value.trim().length > 0) {
+                        remarks.value = "";
+                    }
+
+                    if (msgtype_id != null) {
+                        msgtype_id.value = 0;       // reset to initial
+                    }
+
+                    let dtg1 = new Date();
+                    console.log(`sendmessage() elaped time = ${dtg1 - dtg0} ms`);
+                }
+                await GetServerTime();
+            }
+        }
+    </script>
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        if ('serviceWorker' in navigator) {
+            // register service worker
+            console.log('before register serviceWorker.');
+
+            navigator.serviceWorker.register('/serviceworker.js').then(registration => {
+                console.log('service worker registered');
+                console.log(registration);
+            }).catch(error => {
+                console.log("SW registration failed!");
+                console.log(error);
+            });
+
+            console.log('after register serviceWorker.');
+
+        }
+    </script>
+
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        function SendToAzureQ(msg, callsign) {
+
+            //let theUrl = 'https://capsim-test.servicebus.windows.net/messages/messages?body="helloworld"';
+
+            let theUrl = `/Message?capid=${g_capid}&messages="${msg}&callsign=${callsign}"`;
+            console.log(theUrl);
+            fetchGetText(theUrl);
+
+            /*            let theUrl = `/Message?capid=${g_capid}&callsign=${callsign}"`;
+                        console.log(theUrl);
+
+                        let response = fetchPostJson(theUrl, msg);
+                        console.log(response);
+            */
+        }
+
+
+    </script>
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        function clearAllCaches() {
+
+            if (confirm("Press OK to DELETE ALL sortie Data?")) {
+                if (confirm("Are you really sure?  Press OK to DELETE ALL sortie Data?")) {
+                    localStorage.clear();
+                    loadAllCaches();
+                }
+            }
+        }
+
+        function loadAllCaches() {
+
+            //  read all the caches from persistent storage and load into variables.
+
+            //        var g_messages = null;  	    // table of messages from CACTUS CAPF110 for display on Messages Tab.
+            //        var g_lops = null;	    	    // array of LOPs for local plotting
+            //        var g_outboundmessages = null;	// array of messages pending transfer to CACTUS
+            //        var g_outboundLOPs = null;	    // array of LOPs pending transfer to CACTUS
+            //        var g_capf104a = null;		    // CAPF104a object
+            //        var g_ics214 = null;		    // ics214 object
+
+            g_messages = localStorage.getItem('g_messages');
+            g_lops = localStorage.getItem('g_lops');
+            g_outboundmessages = localStorage.getItem('g_outboundmessages');
+            g_outboundLOPs = localStorage.getItem('g_outboundLOPs');
+            g_capf104a = localStorage.getItem('g_capf104a');
+            g_ics214 = localStorage.getItem('g_ics214');
+
+            g_capid = localStorage.getItem('g_capid');
+            g_sortie = localStorage.getItem('g_sortie');
+            //g_callsign = localStorage.getItem('g_callsign');
+            g_mission_rid = localStorage.getItem('g_mission_rid');
+            g_sortie_type = localStorage.getItem('g_sortie_type');
+            g_mission_num = localStorage.getItem('g_mission_num');
+
+            document.getElementById("capid").value = g_capid;
+            document.getElementById("sortie_type").value = g_sortie_type;
+            document.getElementById("sortie_num").value = g_sortie;
+            //document.getElementById("callsign").value = g_callsign;
+            document.getElementById("mission_num").value = g_mission_num;
+            document.getElementById("mission_rid").value = g_mission_rid;
+
+        }
+
+        function saveMessagesCache() {
+            if (g_messages == null)
+                localStorage.removeItem('g_messages');
+            else
+                localStorage.setItem('g_messages', g_messages);
+        }
+        function saveLopCache() {
+            if (g_lops == null)
+                localStorage.removeItem('g_lops');
+            else
+                localStorage.setItem('g_lops', g_lops);
+        }
+        function saveOutboundMessagesCache() {
+            if (g_outboundmessages == null)
+                localStorage.removeItem('g_outboundmessages');
+            else
+                localStorage.setItem('g_outboundmessages', g_outboundmessages);
+        }
+        function saveOutboundLOPsCache() {
+            if (g_outboundLOPs == null)
+                localStorage.removeItem('g_outboundLOPs');
+            else
+                localStorage.setItem('g_outboundLOPs', g_outboundLOPs);
+        }
+        function saveCapf104aCache() {
+            if (g_capf104a == null)
+                localStorage.removeItem('g_capf104a');
+            else
+                localStorage.setItem('g_capf104a', g_capf104a);
+        }
+        function saveIcs214Cache() {
+            if (g_ics214 == null)
+                localStorage.removeItem('g_ics214');
+            else
+                localStorage.setItem('g_ics214', g_ics214);
+        }
+
+        function testLoadCache() {
+
+            g_messages = 'fake g_message';
+            g_lops = 'fake g_lops';
+            g_outboundmessages = 'fake g_outboundmessages';
+            g_outboundLOPs = 'fake g_outboundLOPs';
+            g_capf104a = 'fake g_capf104a';
+            g_ics214 = 'fake g_ics214';
+
+            saveMessagesCache();
+            saveLopCache();
+            saveOutboundMessagesCache();
+            saveOutboundLOPsCache();
+            saveCapf104aCache();
+            saveIcs214Cache();
+
+            loadAllCaches();
+
+            console.log('output localstorage:');
+            console.log(localStorage.getItem('g_messages'));
+            console.log(localStorage.getItem('g_lops'));
+            console.log(localStorage.getItem('g_outboundmessages'));
+            console.log(localStorage.getItem('g_outboundLOPs'));
+            console.log(localStorage.getItem('g_capf104a'));
+            console.log(localStorage.getItem('g_ics214'));
+            console.log('end output localstorage:');
+
+        }
+
+        async function GetServerTime() {
+
+            console.log(`GetServerTime() ${getHrMinSec()} ...`);
+
+            //      Red = OFFLINE
+            //      Green = ONLINE to CACTUS
+            //      Yellow = ONLINE to CAPSIM, but not CACTUS.
+
+            let url = `api/Time`;
+
+            let results1 = await fetchGetJson(url);
+            console.log(results1);
+
+            let msg = "NOT CONNECTED";
+            g_cxnst = 0;    // NOT CONNECTED
+            let cxnst = document.getElementById('cxnState');
+
+            if (cxnst != null) {
+                cxnst.innerHTML = msg;
+                cxnst.style.background = 'red';
+
+                if (results1 != null) {
+                    let source = results1.source;
+                    let strTime = results1.time;
+
+                    console.log(`source = ${source}`);
+                    console.log(`time = ${strTime}`);
+
+                    if (source != null) {
+                        msg = `Connected to ${source} at ${strTime}z`;
+
+                        cxnst.innerHTML = msg;
+                        if (source == 'CACTUS') {
+                            cxnst.style.background = 'green';
+                            g_cxnst = 2;    // CONNECTED TO CACTUS
+                        }
+                        else {
+                            cxnst.style.background = 'yellow';
+                            g_cxnst = 1;    // CONNECTED TO CAPSIM, BUT CAPSIM CANNOT CONNECT TO CACTUS
+                        }
+                    }
+                }
+            }
+            console.log(`g_cxnst = ${g_cxnst}`);
+            return "";
+        }
+
+        async function processQueue() {
+
+            await GetServerTime();
+
+            console.log(`processQueue() ${getHrMinSec()} ...`);
+
+            //  read the all the messages from the messages queue in local storage, store in JSON array
+            //  send the messages to the Server
+            //  if successful, clear the messages queue, log number of messages sent.
+
+            if (g_cxnst > 0) {
+                if (g_outboundmessages != null) {
+                    console.log(g_outboundmessages);
+
+                    g_outboundmessages = null;
+                    saveOutboundMessagesCache();
+                }
+
+                if (g_outboundLOPs != null) {
+                    console.log(g_outboundLOPs);
+                    g_outboundLOPs = null
+                    saveOutboundLOPsCache();
+                }
+            }
+            //console.log(`processQueue() ${getHrMinSec()} done.`);
+        }
+
+
+
+    </script>
+
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        // On page load:
+        //openCity(null, 'tab0');  // Main
+        openCity(null, 'tab8');  // Config
+
+
+        async function pageload() {
+
+            await GetServerTime();
+
+            startTime();
+
+            startGeoLocationWatcher();
+
+            await processQueue();                         // process the message queue immediately
+
+            setInterval(processQueue, 60000);       // process the message queue every 1 min
+        }
+
+        loadAllCaches();
+        OnChangeSortie_type();
+        setTimeout(pageload, 1000);
+
+    </script>
+
+    <script nonce="u9/WbjsRMU2LFXGRLcq6BA==">
+
+        function updateRefreshTime() {
+
+            let str = '';
+
+            let timerdiv = document.getElementById('refreshid');
+
+            if (timerdiv != null) {
+
+
+                let today = new Date();
+                let hr = today.getUTCHours();
+                let mm = today.getMinutes();
+                let sec = today.getUTCSeconds();
+
+                str = 'Refreshed at ' + lpad(hr) + ':' + lpad(mm) + ':' + lpad(sec) + 'z';
+
+                console.log(str);
+                timerdiv.innerText = str;
+
+                return str;
+
+            }
+        }
+
+        function displayMessages(results) {
+
+            console.log('begin: displayMessages()');
+
+            if (results != null && results.length > 0) {
+
+
+                //  get HTML table for Messages
+                let dt = document.getElementById('msgTbl');
+
+                if (dt != null) {
+
+                    //  how many rows in table?
+                    console.log(`dt.rows.length = ${dt.rows.length}`);
+                    console.log(`results.length = ${results.length}`);
+
+
+                    if ((dt.rows.length - 1) != results.length) {
+
+                        //  if rowcounts are different, then clear table.  write rows to table.
+                        // remove all rows (except TH) from table.
+                        //while (dt.rows.length > 1) {
+                        //    //  https://www.w3schools.com/jsref/met_table_deleterow.asp
+                        //    dt.deleteRow(-1);
+                        //}
+                        truncateMessageList();
+
+                        // Maybe a clever person would only insert the new rows.
+
+                        for (let i = 0; i < results.length; i++) {
+
+                            let row = dt.insertRow(-1);
+                            row.bgColor = "white";
+
+                            if (results[i].isOutbound) {
+                                row.bgColor = "orange";
+                                //  TODO: in the first 5 minutes, play a sound
+                            }
+                            else
+                            {
+                                row.bgColor = results[i].BG_color;
+                                
+                            }
+
+                            let col1 = row.insertCell(0);
+                            col1.align = "CENTER";
+                            let col2 = row.insertCell(1);
+                            col2.align = "LEFT";
+                            let col3 = row.insertCell(2);
+                            col3.align = "CENTER";
+
+
+                            //col1.innerText = results[i].Dtg;
+                            col1.innerText = results[i].Time;
+                            col2.innerText = results[i].Remarks;
+                            col3.innerText = results[i].Message_TypeTxt;
+
+                            //  TODO: display Precedence , Message Type
+                        }
+                    }
+                }
+            }
+
+            console.log('End: displayMessages()');
+        }
+
+        function displayMissionList(results) {
+
+            console.log('begin: displayMissionList()');
+
+            if (results != null && results.length > 0) {
+                g_mission_list = results;   // TODO: should I write this to localstorage?
+            }
+            else {
+                results = g_mission_list;
+            }
+
+            if (results != null && results.length > 0) {
+
+
+                //  get div0
+                let divMissionList = document.getElementById('missionlist');
+
+                if (divMissionList != null) {
+
+                    let ml =
+                        ` <select id = "mission" onchange="OnChangeMission_rid(this);">
+                                                                                                                                                                                    <option value="0"> Choose a mission: </option>
+                                                                                                                                                                                `;
+
+                    for (let i = 0; i < results.length; i++) {
+
+                        let description = results[i].Description;
+                        if (description.length > 50) {
+                            description = description.substring(0, 50);
+                        }
+                        //let descript = `${results[i].Number} - ${description}`;
+                        let descript = `${results[i].Mission_Num} - ${description}`;
+
+                        if (g_mission_rid == results[i].Mission_rid) {
+                            ml += `<option value="${results[i].Mission_rid}" selected>${descript}</option>`;
+                        }
+                        else {
+                            ml += `<option value="${results[i].Mission_rid}">${descript}</option>`;
+                        }
+                    }
+
+
+                    ml += `</select>`;
+
+                    console.log(ml);
+
+                    divMissionList.innerHTML = ml;
+                }
+
+            }
+
+            console.log('End: displayMissionList()');
+        }
+
+        async function refreshMessages() {
+
+            if (validateConfig()) {
+                let dtg0 = new Date();
+
+                //  get mission_number
+                //  get sortie_type
+                //  get sortie number
+                let msgtype_id = document.getElementById("msgtype_id");
+                let msgtype = 0;
+                if (msgtype_id != null) {
+                    msgtype = msgtype_id.value;
+                }
+                console.log(`mission_rid = [${g_mission_rid}]`);
+                console.log(`mission_num = [${g_mission_num}]`);
+                console.log(`sortie_type = [${g_sortie_type}]`);
+                console.log(`sortie = [${g_sortie}]`);
+                console.log(`msgtype = [${msgtype}]`);
+
+                let sortie_num = `${g_sortie_type}${lpad(g_sortie, 4)}`;
+                console.log(`sortie_num = [${sortie_num}]`);
+
+
+                if (sortie_num.length > 1 && (g_mission_rid > 0 || g_mission_num.length > 1)) {
+
+                    let urlMessages = `/messages?sortie_num=${sortie_num}&mission_rid=${g_mission_rid}&mission_num=${g_mission_num}`;
+
+                    let results1 = await fetchGetJson(urlMessages);
+                    console.log(results1);
+
+                    displayMessages(results1);
+                }
+
+
+                updateRefreshTime();
+
+                let dtg1 = new Date();
+                console.log(`refreshMessages() elaped time = ${dtg1 - dtg0} ms`);
+
+                await GetServerTime();
+
+            }
+        }
+
+        async function refreshMissionsList() {
+
+            let dtg0 = new Date();
+            let wing = 'AZ';        //  todo: read from config
+
+            let urlMessages = `/missions?wing=${wing}`;
+
+            let results = await fetchGetJson(urlMessages);
+            console.log(results);
+            //            g_mission_list = results;
+            displayMissionList(results);
+
+            let dtg1 = new Date();
+            console.log(`refreshMissionsList() elaped time = ${dtg1 - dtg0} ms`);
+        }
+
+        /*
+        moved to RadioMessage.js
+        class RadioMessage {
+
+            VID = '';
+            ID = self.crypto.randomUUID();;
+            Dtg = new Date();
+            Precedence = 'R';
+            Remarks = '';
+            Message_Type = 1;
+            Latitude = 0.0;
+            Longitude = 0.0;
+
+            constructor(vid, remarks, message_type, latitude, longitude) {
+
+                this.VID = vid;
+                //this.ID = self.crypto.randomUUID();
+                //this.Dtg = new Date();
+                //this.Precedence = 'R';
+                this.Message_Type = message_type;
+                this.Remarks = remarks;
+                this.Latitude = latitude;
+                this.Longitude = longitude;
+            }
+        }
+        */
+
+        async function SendRadioMessages(msg) {
+
+            if (msg != null) {
+                //let callsign = g_callsign;
+                let msgJson = JSON.stringify(msg);
+                //let url = `/messages?callsign=${callsign}&messages=${msgJson}`;
+                let url = `/messages?messages=${msgJson}`;
+                console.log(url);
+                await fetchPostText(url, msg);
+
+                await GetServerTime();
+            }
+        }
+
+
+        async function onLoadFunction() {
+            //alert('onLoad');
+
+            await refreshMissionsList();
+
+            //await refreshMessages();
+            //TODO: push any queued messages.
+        }
+    </script>
+
+
+    <!-- <a href="https://www.flaticon.com/free-icons/cactus" title="cactus icons">Cactus icons created by Freepik - Flaticon</a>  -->
+</body>
+</html>
+

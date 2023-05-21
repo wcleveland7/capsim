@@ -1,0 +1,28 @@
+{
+	"short_name": "CAPSIM",
+	"name": "CAPSIM: Need some mission tools?",
+	"icons": [
+		{
+			"src": "/images/cactus1.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		},
+		{
+			"src": "/images/cactus2.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		}
+	],
+	"id": "359ABC29-2CAD-472C-A4B9-D0A4AE6E21FC",
+	"start_url": "https://capsimtest202.azurewebsites.net/",
+	"background_color": "#3367D6",
+	"display": "standalone",
+	"scope": "/",
+	"theme_color": "#3367D6",
+	"shortcuts": [
+	],
+	"description": "CAPSIM Mission Tools",
+	"screenshots": [
+	]
+
+}
