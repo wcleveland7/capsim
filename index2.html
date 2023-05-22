@@ -1,0 +1,313 @@
+<TABLE>
+
+    <TR>
+        <TD width="10%" valign="top" align="left">
+
+            <!-- Tab links -->
+            <div class="tab">
+                <!--                    <button id="btn0"  class="tablinks" onclick="openCity(event, 'tab0')">Map</button> <br /> <br />   -->
+                <button id="btn1" class="tablinks" onclick="refreshMessages(); openCity(event, 'tab1')">Messages</button> <br /> <br />
+                <button id="btn2" class="tablinks" onclick="openCity(event, 'tab2')">CAPF109 P1</button> <br /> <br />
+                <button id="btn3" class="tablinks" onclick="openCity(event, 'tab3')">CAPF109 P2</button> <br /> <br />
+                <button id="btn4" class="tablinks" onclick="openCity(event, 'tab4')">CAPF104a P1</button> <br /> <br />
+                <button id="btn5" class="tablinks" onclick="openCity(event, 'tab5')">CAPF104a P2</button> <br /> <br />
+                <button id="btn6" class="tablinks" onclick="openCity(event, 'tab6')">ICS214</button> <br /> <br />
+                <button id="btn7" class="tablinks" onclick="openCity(event, 'tab7')">Briefing</button> <br /> <br />
+                <button id="btn8" class="tablinks" onclick="openCity(event, 'tab8')">Config</button> <br /> <br />
+                <button id="btn9" class="tablinks" onclick="testLoadCache();">Cache Test</button> <br /> <br />
+            </div>
+        </TD>
+
+
+        <TD width="50%" valign="top">
+
+            <!-- Tab0 content ================================================================================================ -->
+            <div id="tab0" class="tabcontent">
+                <img src="/images/AZ.PNG" alt="" width="800" height="600">
+
+                <p>
+                    This tab contains a map.  Maybe this is unnecessary since we are using ATAK?  Pin Drops will show up on this map (and in the log).
+                </p>
+            </div>
+
+
+            <!-- Tab1 content ================================================================================================ -->
+            <div id="tab1" class="tabcontent">
+
+                <CENTER>
+                    <!-- <h3><div id="refreshid">Refreshed: 5/20/2023 4:48:15 PM</div></h3>  -->
+                    <h3><div id="refreshid"></div></h3>
+                    <!--<button onclick="refreshMessages()">Refresh</button> -->
+
+                </CENTER>
+
+                <div id="msgDiv">
+                    <TABLE id="msgTbl" BORDER="1" BGCOLOR="BLACK" CELLPADDING="5">
+                        <thead>
+                            <TR BGCOLOR="WHITE">
+                                <TH>TIME (ZULU)</TH>
+                                <TH>REMARKS</TH>
+                                <TH>TYPE</TH>
+                            </TR>
+                        </thead>
+
+                    </TABLE>
+                </div>
+
+                <p>
+                    This tab represents the "COMM" messages sent to cactus and the messages received from cactus.  Transport is via https.  The information entered in this app will be cached in the browser's local storage so that it is retained if the browser is closed or the tablet is rebooted.
+                </p>
+            </div>
+
+
+            <!-- Tab2 content ================================================================================================ -->
+            <div id="tab2" class="tabcontent">
+
+                <LEFT>
+                    <img id="img2" src="/images/CAPF109_Page1.PNG" alt="" width="800px" height="600">
+                    <p>
+                        This is an edittable version of the first page of the capf109 for the GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
+                    </p>
+                </LEFT>
+            </div>
+
+
+            <!-- Tab3 content ================================================================================================ -->
+            <div id="tab3" class="tabcontent">
+                <LEFT>
+                    <img id="img3" src="/images/CAPF109_Page2.PNG" alt="" width="800px" height="600">
+                    <p>
+                        This is an edittable version of the Second page of the capf109 for the GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
+                    </p>
+                </LEFT>
+            </div>
+
+            <!-- Tab4 content ================================================================================================ -->
+            <div id="tab4" class="tabcontent" valign="top">
+                <LEFT>
+                    <img id="img4" src="/images/CAPF104a_Page1.PNG" alt="" width="800px" height="600">
+                    <p>
+                        This is an edittable version of the first page of the capf104a for the aircrew, probably not useful for GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
+                    </p>
+                </LEFT>
+            </div>
+
+
+            <!-- Tab5 content ================================================================================================ -->
+            <div id="tab5" class="tabcontent" valign="top">
+                <LEFT>
+                    <img id="img5" src="/images/CAPF104a_Page2.PNG" alt="" width="800px" height="600">
+                    <p>
+                        This is an edittable version of the second page of the capf104a for the aircrew, probably not useful for GT/UDF/sUAS.  Caches data in local persistent store.  can export form to pdf.
+                    </p>
+                </LEFT>
+            </div>
+
+            <!-- Tab5 content ================================================================================================ -->
+            <div id="tab6" class="tabcontent" valign="top">
+                <LEFT>
+                    <img src="/images/ICS214.PNG" alt="" width="800px" height="600">
+                    <p>
+                        This is an edittable version of the ICS214, probably not useful for aircrew.  caches data in local persistent store.  can export form to pdf.
+                    </p>
+                </LEFT>
+            </div>
+
+            <!-- Tab5 content ================================================================================================ -->
+            <div id="tab7" class="tabcontent" valign="top">
+                <LEFT>
+                    <embed type="application/pdf" src="/files/briefing.pdf" width="800" height="600" title="Sortie Briefing Pdf" />
+
+
+                    <!--                        <iframe sandbox="" type="application/pdf" src="~/files/briefing.pdf" style="border:none;" title="Sortie Briefing Pdf" width="1000" height="600"></iframe>  -->
+                    <p>
+                        This is a non-edittable version of the CACTUS sortie briefing .pdf.  This does not display embedded in Chrome on Android.
+                    </p>
+                </LEFT>
+            </div>
+
+            <!-- Tab8 content ================================================================================================
+                CONFIG
+            -->
+            <div id="tab8" class="tabcontent" valign="top">
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="capid"> CAP ID:</label>
+
+                            <!-- <input type="text" id="capid" name="capid" minlength="6" maxlength="6" size="6" value="" onchange="g_capid=this.value;">  -->
+                            <input type="number" id="capid" name="capid" min="100000" max="699999" size="6" value="" onchange="OnChangeCapid(this);">
+                        </td>
+                    </tr>
+
+
+                    <!-- Primary input to identify the mission. Not available if offline:-->
+                    <TR>
+                        <TD valign="top">
+                            <label for="mission_rid">Choose a Mission:</label>
+
+                            <div id="missionlist">
+
+                                <select id="mission_rid" onchange="OnChangeMission_rid(this);">
+                                    <option value="0">Choose a mission:</option>
+                                </select>
+                            </div>
+                        </TD>
+                    </TR>
+
+                    <!-- Alternative input to identify the mission. Only necessary if offline startup-->
+                    <tr>
+                        <td>
+                            <label for="mission_num"> Mission Number (for offline startup):</label>
+
+                            <input type="text" id="mission_num" name="mission_num" minlength="4" maxlength="10" size="12" value="" onchange="OnChangeMission_num(this);">
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>
+                            <label for="name">Sortie Number:</label>
+
+                            <input type="number" id="sortie_num" name="sortie_num" min="1" max="999" size="10" value="0" onchange="OnChangeSortie_number(this);">
+                        </td>
+                    </tr>
+                    <TR>
+                        <TD>
+                            <label for="sortie_type">Choose a sortie type:</label>
+
+                            <select id="sortie_type" onchange="OnChangeSortie_type(this);">
+                                <option value="0">Choose:</option>
+                                <option value="A">Air</option>
+                                <option value="G">Ground</option>
+                                <option value="S">sUAS</option>
+                                <option value="U">UDF</option>
+                            </select>
+                        </TD>
+                    </TR>
+
+
+
+                    <!--
+                    <tr>
+                        <td>
+                            <label for="name"> callsign (6 to 7 characters):</label>
+
+                            <input type="text" id="callsign" name="callsign" minlength="4" maxlength="10" size="10" value="" onchange="OnChangeCallsign(this);">
+                        </td>
+                    </tr>
+                    -->
+                    <!--
+                    <TR>
+                        <TD>
+                            <label for="registration">Choose an Airplane:</label>
+
+                            <select id="registration">
+                                <option value="NA">NA</option>
+                                <option value="N15FA">N15FA</option>
+                                <option value="N216CP">N216CP</option>
+                                <option value="N298CP">N298CP</option>
+                                <option value="N331CP">N331CP</option>
+                                <option value="N365CA">N365CA</option>
+                                <option value="N397CP">N397CP</option>
+                                <option value="N447CP">N447CP</option>
+                                <option value="N542CP">N542CP</option>
+                                <option value="N655CP">N655CP</option>
+                                <option value="N806CP">N806CP</option>
+                                <option value="N879CP">N879CP</option>
+                                <option value="N882CP">N882CP</option>
+                                <option value="N930CP">N930CP</option>
+                                <option value="N9456X">N9456X</option>
+                                <option value="N9677A">N9677A</option>
+                                <option value="N9890E">N9890E</option>                </select>
+                        </TD>
+                    </TR>
+                    <tr>
+                        <td>
+                            <label for="name"> callsign (6 to 7 characters):</label>
+
+                            <input type="text" id="name" name="name" minlength="6" maxlength="7" size="10">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="color" id="body" name="body" value="#f6b73c"> <label for="body">Favorite color</label>
+                        </td>
+                    </tr>
+                    -->
+
+                    <tr>
+                        <td>
+                            <button type="button" onclick=";">Archive Sortie Data</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" onclick="clearAllCaches();">Clear Cache</button>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <!--
+                <p>
+                    We might have to config something to make this all work.  Probably need to store the aircraft id, probably as N-number, since cap callsign is changeable.  Hopefully,  i can figure the mission number and sortie number from the tablet identity and the current date/time.  However, this is just a mockup of what the ui might look like.
+                </p>
+                -->
+            </div>
+        </TD>
+
+
+        <td align="right" valign="top">
+
+            <button type="button" onclick="sendmessage('[Engine Start]');">Engine Start</button> &nbsp; &nbsp;
+            <button type="button" onclick="sendmessage('[Take Off]','NEXT?');">Take Off</button> <br /> <br />
+            <button type="button" onclick="sendmessage('[ARV]','NEXT?');">ARV</button> &nbsp; &nbsp;
+            <button type="button" onclick="sendmessage('[DEP]','NEXT?');">DEP</button> <br /> <br />
+            <button type="button" onclick="sendmessage('[RTB]','ETA (Zulu)?');">RTB</button> &nbsp; &nbsp;
+            <button type="button" onclick="sendmessage('[ETA]','Where When (Zulu)?');">ETA</button> <br /> <br />
+            <button type="button" onclick="sendmessage('[Landed]');">Landed</button>  &nbsp; &nbsp;
+            <button type="button" onclick="sendmessage('[Shutdown]');">Shutdown</button> <br /> <br />
+            <button type="button" onclick="sendmessage('[OPS Normal]');">OPS Normal</button>  &nbsp; &nbsp;
+            <button type="button" onclick="sendmessage('[Other]','NEXT?');">Other</button>  <br /> <br />
+            <button type="button" onclick="LOG();">LOG</button>   &nbsp; &nbsp;
+            <!-- <button type="button" onclick="pin_drop('[Drop Pin]');">Drop Pin</button> -->
+            <!-- <br /><br /><a href="sms:+4802904550?body=Text%20Here%20end!">Android SMS</a> -->
+            <!-- <br /><br /><a href="sms://open?addresses=+14802904550/&body=Text%20Here%20end!">iOS SMS</a> -->
+            <!-- <button type="button" onclick="LOP();">Lop</button>   &nbsp; &nbsp; -->
+
+            <br />
+            <label for="name">Remarks:</label> <br />
+
+            <textarea id="remarks" name="remarks" rows="3" cols="40" placeholder="enter remarks here!"></textarea>
+
+            <br />
+            PRIORITY MESSAGES:<br>
+            <SELECT NAME="msgtype" id="msgtype_id">
+                <OPTION VALUE="0">Routine</OPTION>
+                <OPTION VALUE="4">Beacon First Heard</OPTION>
+                <OPTION VALUE="3">Beacon Bearing Report</OPTION>
+                <OPTION VALUE="5">Beacon Silenced</OPTION>
+                <OPTION VALUE="7">Objective Confirmed</OPTION>
+                <OPTION VALUE="8">Objective Located</OPTION>
+                <OPTION VALUE="15">Survivor Located</OPTION>
+                <OPTION VALUE="101">Other Priority Message</OPTION>
+                <OPTION VALUE="102">Other Emergency Message</OPTION>
+            </SELECT>
+
+            <h4 id="timeid">HHmm z</h4>
+            <div></div>
+            <h4 id="cxnState">not connected</h4>
+            <div></div>
+            <div id="coords"></div>
+            <div></div>
+            <div></div>
+            <div id="debugTxt"></div>
+            <div></div>
+
+        </td>
+    </TR>
+
+</TABLE>
