@@ -58,16 +58,10 @@
         <hr>
         
         <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <a href="#info" class="nav-link text-white active" data-bs-toggle="pill" data-bs-target="#info" type="button" role="tab">
-              <i class="bi bi-house-door"></i>
-              Mission Info
-            </a>
-          </li>
           <li>
             <a href="#comm" class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#comm" type="button" role="tab">
                 <i class="bi bi-send"></i>
-                Send Message  
+                Quick Message  
             </a>
           </li>
           <li>
@@ -76,16 +70,25 @@
                 Set Times
             </a>
           </li>
+          
+          <li>
+            <a href="#lop" class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#lop" type="button" role="tab">
+                <i class="bi bi-pin-angle"></i>
+              LOP Report
+            </a>
+          </li>
+          
           <li>
             <a href="#log" class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#log" type="button" role="tab">
                 <i class="bi bi-chat-left-text"></i>
                 Message Log
             </a>
           </li>
-          <li>
-            <a href="#lop" class="nav-link text-white" data-bs-toggle="pill" data-bs-target="#lop" type="button" role="tab">
-                <i class="bi bi-pin-angle"></i>
-              LOP Report
+          
+          <li class="nav-item">
+            <a href="#info" class="nav-link text-white active" data-bs-toggle="pill" data-bs-target="#info" type="button" role="tab">
+              <i class="bi bi-house-door"></i>
+              Mission Info
             </a>
           </li>
           
@@ -122,8 +125,8 @@
           
         <hr>
 
-        <div class="align-items-center text-white fs-2 m-2" id="timeid">
-            12:34z
+        <div class="align-items-center text-white fs-2 m-2 float-end" id="timeid">
+            <p id="timeid">12:34z</p>
         </div>
 
 
@@ -154,8 +157,25 @@
         <!-- Comm Log Tab-->
         <div class="tab-pane fade " id="log" role="tabpanel"> 
 
-          <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
-            <div class="list-group">
+          <div class="d-flex flex-column p-4 gap-4 py-md-5 align-items-center justify-content-center">
+            
+            <div class="collapse" id="queuedMessage">
+            <h2>Queued Messages</h2>
+            <div class="list-group w-100">
+            <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" >
+              <i class="bi bi-airplane"></i>
+              <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                  <h6 class="mb-0">RTB</h6>
+                </div>
+                <small class="opacity-50 text-nowrap">0037z</small>
+              </div>
+            </a>
+            </div>
+          </div>
+            
+            <h2>Message Log</h2>
+            <div class="list-group w-100">
               <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" >
                 <i class="bi bi-airplane"></i>
                 <div class="d-flex gap-2 w-100 justify-content-between">
@@ -304,12 +324,14 @@
                   <button class="btn btn-info dropdown-toggle w-50 m-1 p-2" type="button" data-bs-toggle="dropdown">
                     Select a Mission
                   </button>
-                  <ul class="dropdown-menu" id="missionList">
+                  <ul class="dropdown-menu border-info table-striped" id="missionList">
                     <li><a class="dropdown-item" href="#">Not Connected</a></li>
                     <li><a class="dropdown-item" href="#" id="AZ_TEST">AZ_TEST - CACTUS test mission. Play here if you want, but d</a></li>
+                    <li><a class="dropdown-item" href="#" id="23-T-3860">23-T-3860 - CD Training</a></li>
                     <script> 
                     //todo this will get populated from mission load
                     $("#AZ_TEST").click(function () { $("#inputMission").val("AZ_TEST");   });
+                    $("#23-T-3860").click(function () { $("#inputMission").val("23-T-3860");   });
                   </script>
                   </ul>
                 </div>
